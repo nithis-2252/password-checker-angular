@@ -6,6 +6,89 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    function initCanvas() {
+      const canvas = document.getElementById('dotCanvas');
+      if (!canvas) { setTimeout(initCanvas, 100); return; }
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const SPACING = 26;
+      const blobs = Array.from({ length: 6 }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: 60 + Math.random() * 50,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        cursor: false,
+      }));
+
+      const cursorBlob = { x: -300, y: -300, r: 0, vx: 0, vy: 0, cursor: true, visible: false};
+      blobs.push(cursorBlob);
+
+      let mouseX = -300, mouseY = -300;
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorBlob.visible = true;
+        cursorBlob.r = 70;
+        
+      });
+
+      window.addEventListener('mouseleave', () => {
+        cursorBlob.visible = false;
+        cursorBlob.r = 0;
+        
+      });
+
+      function metaball(x, y) {
+        let v = 0;
+        for (const b of blobs) {
+          const d2 = (x - b.x) ** 2 + (y - b.y) ** 2;
+          v += (b.r * b.r) / (d2 || 1);
+        }
+        return v;
+      }
+
+      function draw() {
+        const W = canvas.width, H = canvas.height;
+        cursorBlob.x += (mouseX - cursorBlob.x) * 0.1;
+        cursorBlob.y += (mouseY - cursorBlob.y) * 0.1;
+        ctx.clearRect(0, 0, W, H);
+        for (const b of blobs) {
+          b.x += b.vx; b.y += b.vy;
+          if (b.x < -b.r) b.x = W + b.r;
+          if (b.x > W + b.r) b.x = -b.r;
+          if (b.y < -b.r) b.y = H + b.r;
+          if (b.y > H + b.r) b.y = -b.r;
+        }
+        const cols = Math.ceil(W / SPACING) + 1;
+        const rows = Math.ceil(H / SPACING) + 1;
+        for (let ci = 0; ci < cols; ci++) {
+          for (let ri = 0; ri < rows; ri++) {
+            const px = ci * SPACING, py = ri * SPACING;
+            const v = metaball(px, py);
+            if (v > 1.0) {
+              const alpha = Math.min((v - 1.0) * 2.5, 1) * 0.85;
+              const r = Math.min(4, 1.5 + (v - 1.0) * 5);
+              ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+              ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI * 2); ctx.fill();
+            } else {
+              ctx.fillStyle = 'rgba(255,255,255,0.1)';
+              ctx.beginPath(); ctx.arc(px, py, 1, 0, Math.PI * 2); ctx.fill();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    initCanvas();
+  });
+</script>
 </head>
 <body>
   <app-root></app-root>

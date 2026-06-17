@@ -1,0 +1,178 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.scene {
+  min-height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+}
+
+#dotCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  z-index: 10;
+  width: 380px;
+  padding: 40px 36px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 28px;
+}
+
+/* ── Input ── */
+.input-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.pw-input {
+  width: 100%;
+  padding: 14px 46px 14px 15px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 11px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.pw-input::placeholder { color: rgba(255, 255, 255, 0.2); }
+.pw-input:focus { border-color: rgba(255, 255, 255, 0.35); }
+
+.toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.toggle-btn:hover { color: rgba(255, 255, 255, 0.7); }
+
+/* ── Strength bar ── */
+.strength-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  height: 18px;
+}
+
+.strength-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.4s, opacity 0.3s;
+  animation: appleSlideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.strength-pct {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.4s ease;
+}
+
+/* ── Checklist ── */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 13px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chk.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chk.pass {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.chk-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  transition: background 0.35s ease,
+              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chk.pass .chk-dot {
+  background: #ffffff;
+  transform: scale(1.4);
+}
+
+/* ── style slide animation ── */
+@keyframes appleSlideIn {
+  from { opacity: 0; transform: translateY(-5px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* ── Staggered check entry ── */
+.chk:nth-child(1) { transition-delay: 0ms; }
+.chk:nth-child(2) { transition-delay: 30ms; }
+.chk:nth-child(3) { transition-delay: 60ms; }
+.chk:nth-child(4) { transition-delay: 90ms; }
+.chk:nth-child(5) { transition-delay: 120ms; }

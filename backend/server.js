@@ -9,9 +9,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'password-checker-secret-key-12345';
 
-// Enable CORS for Host (4200) and Remotes (4201, 4202)
+// Enable CORS for Host and Remotes
 app.use(cors({
-  origin: ['https://password-checker-angular-alpha.vercel.app', 'http://localhost:4200', 'http://localhost:4201', 'http://localhost:4202'],
+  origin: [
+    'https://password-checker-angular-alpha.vercel.app',
+    'https://password-checker-login-remote.vercel.app',
+    'https://password-checker-signup-remote.vercel.app',
+    'http://localhost:4200',
+    'http://localhost:4201',
+    'http://localhost:4202'
+  ],
   credentials: true
 }));
 

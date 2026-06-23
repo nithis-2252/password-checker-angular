@@ -10,11 +10,11 @@ import { environment } from 'src/environments/environment';
 const isProduction = environment.production;
 
 const loginRemoteEntry = isProduction
-  ? `${window.location.origin}/login-remote/remoteEntry.js`
+  ? 'https://password-checker-login-remote.vercel.app/remoteEntry.js'
   : 'http://localhost:4201/remoteEntry.js';
 
 const signupRemoteEntry = isProduction
-  ? `${window.location.origin}/signup-remote/remoteEntry.js`
+  ? 'https://password-checker-signup-remote.vercel.app/remoteEntry.js'
   : 'http://localhost:4202/remoteEntry.js';
 
 const routes: Routes = [

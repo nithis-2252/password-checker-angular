@@ -16,12 +16,12 @@ module.exports = {
         "./LoginModule": "./projects/login-remote/src/app/login/login.module.ts"
       },
       shared: {
-        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: "11.2.14" },
-        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: "11.2.14" },
-        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: "11.2.14" },
-        "@angular/forms": { singleton: true, strictVersion: true, requiredVersion: "11.2.14" },
-        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: "11.2.14" },
-        rxjs: { singleton: true, strictVersion: true, requiredVersion: "6.6.7" }
+        "@angular/core": { singleton: true, strictVersion: false, requiredVersion: "11.2.14" },
+        "@angular/common": { singleton: true, strictVersion: false, requiredVersion: "11.2.14" },
+        "@angular/common/http": { singleton: true, strictVersion: false, requiredVersion: "11.2.14" },
+        "@angular/forms": { singleton: true, strictVersion: false, requiredVersion: "11.2.14" },
+        "@angular/router": { singleton: true, strictVersion: false, requiredVersion: "11.2.14" },
+        rxjs: { singleton: true, strictVersion: false, requiredVersion: "6.6.7" }
       }
     })
   ],

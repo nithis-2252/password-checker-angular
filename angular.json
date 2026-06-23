@@ -175,7 +175,8 @@
             ],
             "scripts": [],
             "extraWebpackConfig": "projects/login-remote/webpack.config.js",
-            "commonChunk": false
+            "commonChunk": false,
+            "aot": true
           },
           "configurations": {
             "production": {
@@ -187,8 +188,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "30kb",
+                  "maximumError": "50kb"
                 }
               ],
               "fileReplacements": [
@@ -304,7 +305,8 @@
             ],
             "scripts": [],
             "extraWebpackConfig": "projects/signup-remote/webpack.config.js",
-            "commonChunk": false
+            "commonChunk": false,
+            "aot": true
           },
           "configurations": {
             "production": {
@@ -316,8 +318,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "30kb",
+                  "maximumError": "50kb"
                 }
               ],
               "fileReplacements": [

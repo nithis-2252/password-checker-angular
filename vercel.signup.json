@@ -1,7 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "export NODE_OPTIONS=--openssl-legacy-provider && npx ng build signup-remote --prod",
+  "buildCommand": "npx ng build signup-remote --prod",
   "outputDirectory": "dist/signup-remote",
+  "env": {
+    "NODE_OPTIONS": "--openssl-legacy-provider"
+  },
   "headers": [
     {
       "source": "/(.*)",
